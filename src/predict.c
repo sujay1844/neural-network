@@ -4,22 +4,18 @@
 
 Matrix *predict(Matrix *input, Matrix *weights, Matrix *biases)
 {
-	Matrix *result = add(multiply(weights, input), biases);
-	return result;
+	return add(multiply(weights, input), biases);
 }
 
 Matrix *train(Matrix *input, Matrix *weights, Matrix *biases, Matrix *expected)
 {
-	Matrix *result = predict(input, weights, biases);
-	Matrix *error = subtract(result, expected);
-	printf("hello\n");
-	Matrix *gradient = multiply(get_transpose(input), error);
-	delete_matrix(error);
+	Matrix *prediction = predict(input, weights, biases);
+	Matrix *error = subtract(prediction, expected);
+	Matrix *gradient = multiply(input, error);
 	Matrix *delta = scalar_multiply(gradient, 0.01);
-	delete_matrix(gradient);
 	weights = subtract(weights, delta);
-	delete_matrix(delta);
 	biases = subtract(biases, error);
-	delete_matrix(result);
+	delete_matrices(4, prediction, error, gradient, delta);
+	printf("train\n");
 	return weights;
 }

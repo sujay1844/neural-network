@@ -2,6 +2,8 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <sys/types.h>
+#include <string.h>
 
 #include "matrix.h"
 
@@ -243,6 +245,7 @@ Matrix *zeros(int rows, int cols)
 
 void print_matrix(Matrix *matrix)
 {
+	printf("Size: %d x %d\n", matrix->rows, matrix->cols);
 	for (int i = 0; i < matrix->rows; i++)
 	{
 		for (int j = 0; j < matrix->cols; j++)
@@ -270,3 +273,57 @@ void delete_matrices(int num_matrices, ...)
 	}
 	va_end(matrices);
 }
+
+// Matrix *import_from_csv(char *filename)
+// {
+// 	FILE *file = fopen(filename, "r");
+// 	if (file == NULL)
+// 	{
+// 		printf("Error: file not found\n");
+// 		exit(1);
+// 	}
+// 	int rows = 0;
+// 	int cols = 0;
+// 	char *line = NULL;
+// 	size_t len = 0;
+// 	ssize_t read;
+// 	while ((read = getline(&line, &len, file)) != -1)
+// 	{
+// 		rows++;
+// 		char *token = strtok(line, ",");
+// 		while (token != NULL)
+// 		{
+// 			cols++;
+// 			token = strtok(NULL, ",");
+// 		}
+// 		break;
+// 	}
+// 	rewind(file);
+// 	Matrix *result = malloc(sizeof(Matrix));
+// 	result->rows = rows;
+// 	result->cols = cols;
+// 	result->data = malloc(sizeof(double *) * result->rows);
+// 	for (int i = 0; i < result->rows; i++)
+// 	{
+// 		result->data[i] = malloc(sizeof(double) * result->cols);
+// 	}
+// 	int i = 0;
+// 	while ((read = getline(&line, &len, file)) != -1)
+// 	{
+// 		char *token = strtok(line, ",");
+// 		int j = 0;
+// 		while (token != NULL)
+// 		{
+// 			result->data[i][j] = atof(token);
+// 			j++;
+// 			token = strtok(NULL, ",");
+// 		}
+// 		i++;
+// 	}
+// 	fclose(file);
+// 	if (line)
+// 	{
+// 		free(line);
+// 	}
+// 	return result;
+// }

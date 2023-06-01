@@ -4,7 +4,7 @@
 CC = gcc
 
 # Compiler flags
-CFLAGS = -Wall -Werror -Wextra -pedantic -std=c99 -lm
+CFLAGS = -Wall -Werror -Wextra -pedantic -lm
 
 # Directories
 BUILD_DIR = build
