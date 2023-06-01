@@ -1,0 +1,1 @@
+This is an implementation of a simple neural network in C. It doesn't work yet, but it's a start. Segmentation fault for now.
