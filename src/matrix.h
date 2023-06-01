@@ -22,5 +22,6 @@ Matrix *add(Matrix *a, Matrix *b);
 Matrix *subtract(Matrix *a, Matrix *b);
 Matrix *multiply(Matrix *a, Matrix *b);
 Matrix *scalar_multiply(Matrix *matrix, double scalar);
+Matrix *normalize(Matrix *matrix);
 
 #endif // MATRIX_H

@@ -274,6 +274,42 @@ void delete_matrices(int num_matrices, ...)
 	va_end(matrices);
 }
 
+Matrix *normalize(Matrix *matrix)
+{
+	Matrix *result = malloc(sizeof(Matrix));
+	result->rows = matrix->rows;
+	result->cols = matrix->cols;
+	result->data = malloc(sizeof(double *) * result->rows);
+	for (int i = 0; i < result->rows; i++)
+	{
+		result->data[i] = malloc(sizeof(double) * result->cols);
+	}
+	double max = matrix->data[0][0];
+	double min = matrix->data[0][0];
+	for (int i = 0; i < matrix->rows; i++)
+	{
+		for (int j = 0; j < matrix->cols; j++)
+		{
+			if (matrix->data[i][j] > max)
+			{
+				max = matrix->data[i][j];
+			}
+			if (matrix->data[i][j] < min)
+			{
+				min = matrix->data[i][j];
+			}
+		}
+	}
+	for (int i = 0; i < result->rows; i++)
+	{
+		for (int j = 0; j < result->cols; j++)
+		{
+			result->data[i][j] = (matrix->data[i][j] - min) / (max - min);
+		}
+	}
+	return result;
+}
+
 // Matrix *import_from_csv(char *filename)
 // {
 // 	FILE *file = fopen(filename, "r");

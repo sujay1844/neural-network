@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "matrix.h"
 
@@ -11,11 +12,13 @@ Matrix *train(Matrix *input, Matrix *weights, Matrix *biases, Matrix *expected)
 {
 	Matrix *prediction = predict(input, weights, biases);
 	Matrix *error = subtract(prediction, expected);
-	Matrix *gradient = multiply(input, error);
+	Matrix *gradient = normalize(error);
 	Matrix *delta = scalar_multiply(gradient, 0.01);
-	weights = subtract(weights, delta);
-	biases = subtract(biases, error);
+	// print_matrix(weights);
+	// print_matrix(delta);
+	Matrix *new_weights = multiply(delta, weights);
+	// print_matrix(new_weights);
+	// biases = subtract(biases, error);
 	delete_matrices(4, prediction, error, gradient, delta);
-	printf("train\n");
-	return weights;
+	return new_weights;
 }
