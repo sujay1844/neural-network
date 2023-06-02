@@ -10,7 +10,7 @@ typedef struct Matrix
 
 Matrix *get_random_matrix(int rows, int cols);
 Matrix *get_sigmoid(Matrix *matrix);
-void print_matrix(Matrix *matrix);
+void print_matrix(Matrix *matrix, char name[]);
 double get_determinant(Matrix *matrix);
 Matrix *get_transpose(Matrix *matrix);
 Matrix *get_identity_matrix(int size);
